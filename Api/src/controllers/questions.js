@@ -37,22 +37,14 @@ module.exports = {
           dataresponse.push({
             id: element.question_id,
             question: element.question,
-            is_image: element.is_images,
-            question_image: element.question_image,
-            question_data: getData(element.question_id, (err, data) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    return data;
-                }
-                }
-            ),
+            answers: element.answers,
+            correct:element.correct
           });
         });
 
         res.send({
           success: true,
-          message: "Berhasil ambil data!",
+          message: "Berhasil ambil data",
           data: dataresponse,
         });
       });
