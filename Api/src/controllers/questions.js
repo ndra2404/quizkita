@@ -44,7 +44,7 @@ module.exports = {
 
         res.send({
           success: true,
-          message: "Berhasil ambil data",
+          message: "Berhasil ambil data dong",
           data: dataresponse,
         });
       });
