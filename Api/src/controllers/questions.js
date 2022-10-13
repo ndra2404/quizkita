@@ -25,30 +25,31 @@ function getData(id, callback) {
     }
   });
 }
-module.exports = {
-  getAllQuestions(req, res) {
-    pool.getConnection(function (err, connection) {
-      if (err) throw err;
-      connection.query("SELECT * FROM question", function (error, results) {
-        if (error) throw error;
+function getAllQuestions(req, res) {
+  pool.getConnection(function (err, connection) {
+    if (err) throw err;
+    connection.query("SELECT * FROM question", function (error, results) {
+      if (error) throw error;
 
-        let dataresponse = [];
-        results.forEach((element) => {
-          dataresponse.push({
-            id: element.question_id,
-            question: element.question,
-            answers: element.answers,
-            correct:element.correct
-          });
-        });
-
-        res.send({
-          success: true,
-          message: "Berhasil ambil data dong",
-          data: dataresponse,
+      let dataresponse = [];
+      results.forEach((element) => {
+        dataresponse.push({
+          id: element.question_id,
+          question: element.question,
+          answers: element.answers,
+          correct:element.correct
         });
       });
-      connection.release();
+
+      res.send({
+        success: true,
+        message: "Berhasil ambil data dong",
+        data: dataresponse,
+      });
     });
-  },
+    connection.release();
+  });
+}
+module.exports = {
+  getAllQuestions
 };
